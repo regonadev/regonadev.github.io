@@ -3,46 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Soft Görünümlü Siyah Arka Planlı Website</title>
+  <title>Youtube to Wav</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <div class="center-content">
     <div class="container">
-    <img src="Youtube_logo.png" alt="Logo"> <!-- Logo eklendi -->
+      <img src="Youtube_logo.png" alt="Logo">
       <h1>Youtube to WAV</h1>
       <p>made by Regona</p>
     </div>
     <div class="bar">
       <input type="text" id="youtubeUrl" placeholder="YouTube URL">
-      <p></p>
       <button onclick="convertToWav()">Dönüştür</button>
       <div class="loader" id="loader"></div>
+      <p id="conversionStatus"></p>
       <a href="#" download id="downloadBtn" style="display: none;">İndir</a>
     </div>
   </div>
 
   <script>
-    function convertToWav() {
-      var url = document.getElementById("youtubeUrl").value;
-      fetch('/convert', {
+    async function convertToWav() {
+      const youtubeUrl = document.getElementById("youtubeUrl").value;
+      const response = await fetch('/convert', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({url: url})
-      })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("output").innerHTML = data.message;
-        document.getElementById("downloadBtn").href = data.wav_file;
-        document.getElementById("downloadBtn").style.display = "block";
-      })
-      .catch(error => {
-        console.error('Error:', error);
+        body: JSON.stringify({ url: youtubeUrl })
       });
+      const result = await response.json();
+      const conversionStatus = document.getElementById("conversionStatus");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      if (response.ok) {
+        conversionStatus.textContent = result.message;
+        downloadBtn.href = result.wav_file;
+        downloadBtn.style.display = "inline-block";
+        downloadBtn.setAttribute("download", "");
+      } else {
+        conversionStatus.textContent = "Dönüştürme işlemi başarısız oldu.";
+      }
     }
   </script>
+
 </body>
 </html>
