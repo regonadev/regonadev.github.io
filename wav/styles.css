@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'SF Pro Medium';
+  font-weight: 500;
+  src: url('SF-Pro-Display-Medium.otf');
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "SF Pro Medium", Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.bar {
+  text-align: center;
+  padding: 35px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  width: 80%; /* Örnek olarak barın genişliğini ekranın %80'ine ayarladık */
+  max-width: 600px; /* Barın maksimum genişliğini belirledik */
+  margin: 0 auto; /* Barı yatay olarak merkezledik */
+}
+
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #111;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ddd;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+  display: none;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#downloadBtn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #111;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: none;
+}
+
+#downloadBtn:hover {
+  background-color: #ddd;
+}
+
+.container img {
+  width: 100px; /* Logo genişliği */
+  height: auto; /* Logo yüksekliği otomatik olarak ayarlanır */
+}
+
+
+
+

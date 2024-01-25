@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soft Görünümlü Siyah Arka Planlı Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="center-content">
+    <div class="container">
+    <img src="Youtube_logo.png" alt="Logo"> <!-- Logo eklendi -->
+      <h1>Youtube to WAV</h1>
+      <p>made by Regona</p>
+    </div>
+    <div class="bar">
+      <input type="text" id="youtubeUrl" placeholder="YouTube URL">
+      <p></p>
+      <button onclick="convertToWav()">Dönüştür</button>
+      <div class="loader" id="loader"></div>
+      <a href="#" download id="downloadBtn" style="display: none;">İndir</a>
+    </div>
+  </div>
+
+  <script>
+    function convertToWav() {
+      var url = document.getElementById("youtubeUrl").value;
+      fetch('/convert', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({url: url})
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("output").innerHTML = data.message;
+        document.getElementById("downloadBtn").href = data.wav_file;
+        document.getElementById("downloadBtn").style.display = "block";
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  </script>
+</body>
+</html>
